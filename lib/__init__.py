@@ -1,3 +1,5 @@
-from imageFunc import showImg
-from imageFunc import salt
-from imageFunc import createImg
+
+from matplotlib import pyplot as plt
+import numpy as np
+
+__all__ = ['imageFunc']

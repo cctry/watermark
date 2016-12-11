@@ -3,17 +3,18 @@ from matplotlib import pyplot as plt
 import numpy as np
 import cv2
 import random
+import math
+import mathFunc
 
 def showImg(img, flag = 0):
-    img = BGR2RGB(img)
-    plt.imshow(img)#会变色 要改成RGB
+    if img.ndim == 3:
+        img = BGR2RGB(img)
+    plt.imshow(img)
     if flag == 0:
         plt.xticks([]),plt.yticks([]) #隐藏坐标线 
     plt.show()
 
-def createImg(shape, typeNum):
-    if isinstance(shape, tuple) is False:
-        pass #TODO exception
+def createImg(shape, typeNum = 8):#[height, width]
     types = (8, 16, 32, 64)
     if typeNum not in types:
         pass #TODO exception
@@ -28,7 +29,7 @@ def createImg(shape, typeNum):
     return emptyImage
 
 def salt(img, n, seed = 0):#在随机n个点添加噪声
-    for k in range(n):
+    for k in xrange(n):
         if seed == 0:
             i = int(random.random() * img.shape[1])
             j = int(random.random() * img.shape[0])
@@ -48,3 +49,27 @@ def BGR2RGB(img):
     dst = cv2.merge([r, g, b])
     return dst
 
+def splitImg(img):#from left to right; from top to down
+    height = img.shape[0]
+    width = img.shape[1]
+    LEN = 128#length of MD5
+    hli = mathFunc.decPrime(height)
+    wli = mathFunc.decPrime(width)
+    if len(hli) == 1:
+        pass#TODO exception
+    if len(wli) == 1:
+        pass#TODO exception
+    size = mathFunc.getBlockSize(hli, wli, LEN)
+    hNum = height/size[0]
+    wNum = width/size[1]
+    res = list()
+    for i in xrange(hNum):
+        for j in xrange(wNum):
+            startRow = 0 + i*size[0]
+            endRow = size[0] + i*size[0]
+            startCol = 0 + j*size[1]
+            endCol = size[1] + j*size[1]
+            block = img[startRow:endRow, startCol:endCol]
+            res.append(block)
+    return res
+    

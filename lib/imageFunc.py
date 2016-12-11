@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 def showImg(img, flag = 0):
-    plt.imshow(img)#会变色
+    plt.imshow(img)#会变色 要改成RGB
     if flag == 0:
         plt.xticks([]),plt.yticks([]) #隐藏坐标线 
     plt.show()
@@ -40,6 +40,5 @@ def salt(img, n, seed = 0):#在随机n个点添加噪声
             img[j,i,2] = 255
     return img
 
-#def fft(img, ):
- #   f = np.fft.fft2(img)
- #   fshift = np.fft.fftshift(f)
+def changeSpace(img, cmap):
+

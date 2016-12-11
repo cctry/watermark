@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 from matplotlib import pyplot as plt
 import numpy as np
+import cv2
 
 def showImg(img, flag = 0):
     img = BGR2RGB(img)

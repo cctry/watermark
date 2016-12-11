@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 def showImg(img, flag = 0):
+    img = BGR2RGB(img)
     plt.imshow(img)#会变色 要改成RGB
     if flag == 0:
         plt.xticks([]),plt.yticks([]) #隐藏坐标线 
@@ -27,11 +28,11 @@ def createImg(shape, typeNum):
 def salt(img, n, seed = 0):#在随机n个点添加噪声
     for k in range(n):
         if seed == 0:
-            i = int(np.random.seed() * img.shape[1])#随机数处理有问题TODO
-            j = int(np.random.seed() * img.shape[0])
+            i = int(np.random.random(seed) * img.shape[1])#随机数处理有问题TODO
+            j = int(np.random.random(seed) * img.shape[0])
         else:
-            i = int(np.random.seed(seed) * img.shape[1])
-            j = int(np.random.seed(seed) * img.shape[0])
+            i = int(np.random.random(seed) * img.shape[1])
+            j = int(np.random.random(seed) * img.shape[0])
         if img.ndim == 2:#为灰度图时
             img[j,i] = 255
         elif img.ndim == 3:
@@ -40,5 +41,8 @@ def salt(img, n, seed = 0):#在随机n个点添加噪声
             img[j,i,2] = 255
     return img
 
-def changeSpace(img, cmap):
+def BGR2RGB(img):
+    b, g, r = cv2.split(img)
+    dst = cv2.merge([r, g, b])
+    return dst
 

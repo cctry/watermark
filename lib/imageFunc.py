@@ -2,6 +2,7 @@
 from matplotlib import pyplot as plt
 import numpy as np
 import cv2
+import random
 
 def showImg(img, flag = 0):
     img = BGR2RGB(img)
@@ -29,11 +30,11 @@ def createImg(shape, typeNum):
 def salt(img, n, seed = 0):#在随机n个点添加噪声
     for k in range(n):
         if seed == 0:
-            i = int(np.random.random(seed) * img.shape[1])#随机数处理有问题TODO
-            j = int(np.random.random(seed) * img.shape[0])
+            i = int(random.random() * img.shape[1])
+            j = int(random.random() * img.shape[0])
         else:
-            i = int(np.random.random(seed) * img.shape[1])
-            j = int(np.random.random(seed) * img.shape[0])
+            i = int(random.random(seed) * img.shape[1])
+            j = int(random.random(seed) * img.shape[0])
         if img.ndim == 2:#为灰度图时
             img[j,i] = 255
         elif img.ndim == 3:

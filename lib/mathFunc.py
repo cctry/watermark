@@ -36,3 +36,22 @@ def getBlockSize(hli, wli, MAX):#output [height, width]
     res.append(hli[hindex])
     res.append(wli[windex])    
     return res                
+
+def hash(M, N, block):
+    m = md5.new()
+    m.update(str(M))
+    m.update(str(N))
+    m.update(block)
+    temp = m.digest()
+    biStrTemp = list()
+    for char in temp:
+        deTemp = ord(char)
+        binTemp = bin(deTemp)
+        binTemp = binTemp[2:]
+        if len(binTemp) < 8:
+            pre = '0' * (8-len(binTemp))
+            binTemp = pre + binTemp
+        biStrTemp.append(binTemp)
+    nullStr = ''
+    res = nullStr.join(biStrTemp)
+    return res

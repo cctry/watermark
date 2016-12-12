@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 import cv2
 import random
-import math
+import md5
 import mathFunc
 
 def showImg(img, flag = 0):
@@ -73,3 +73,23 @@ def splitImg(img):#from left to right; from top to down
             res.append(block)
     return res
     
+def getGChn(img):
+    b = cv2.split(img)[1]
+    return b
+
+def zeroLSB(block):
+    noRow = block.shape[0]
+    noCol = block.shape[1]
+    for row in xrange(noRow):
+        for col in xrange(noCol):
+            val = block[row, col]
+            val>>1
+            val<<1
+    return block
+
+def hash(M, N, block):
+    m = md5.new()
+    m.update(M)
+    m.update(N)
+    m.update(block)
+    res = m.digest()

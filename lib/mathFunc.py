@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*
+import md5
+import numpy
 def decPrime(num):
     res = set()
     for i in xrange(2,num+1):
@@ -20,7 +22,7 @@ def getBlockSize(hli, wli, MAX):#output [height, width]
         bli = wli
         sli = hli
         flag = 2
-    res = list()
+    size = list()
     for i in xrange(1, len(sli)):
         for j in xrange(1, len(bli)):
             if (sli[-i] * bli[-j]) <= MAX:
@@ -33,11 +35,11 @@ def getBlockSize(hli, wli, MAX):#output [height, width]
                 break
             else:
                 continue
-    res.append(hli[hindex])
-    res.append(wli[windex])    
-    return res                
+    size.append(hli[hindex])
+    size.append(wli[windex])    
+    return size                
 
-def hash(M, N, block):
+def hash(M, N, block):#return bit array
     m = md5.new()
     m.update(str(M))
     m.update(str(N))
@@ -53,5 +55,16 @@ def hash(M, N, block):
             binTemp = pre + binTemp
         biStrTemp.append(binTemp)
     nullStr = ''
-    res = nullStr.join(biStrTemp)
-    return res
+    resTemp = nullStr.join(biStrTemp)
+    bitArray = list()
+    for i in xrange(len(resTemp)):
+        res.append(resTemp[i])
+    return bitArray
+
+def cutHash(hash, len):
+    hash = hash[0:len]
+    return hash
+
+def reshape(bitarray, size):
+    bitBlock = numpy.array(bitarray).reshape(size[0], size[1])
+    return bitBlock

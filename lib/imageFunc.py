@@ -87,3 +87,7 @@ def zeroLSB(block):
             val<<1
     return block
 
+def xor(block, bitArray):
+    bitBlock = mathFunc.reshape(bitArray)
+    dst = cv2.bitwise_xor(block, bitArray)
+    return dst

@@ -89,5 +89,5 @@ def zeroLSB(block):
 
 def xor(block, bitArray):
     bitBlock = mathFunc.reshape(bitArray)
-    dst = cv2.bitwise_xor(block, bitArray)
+    dst = np.bitwise_xor(block, bitArray)
     return dst

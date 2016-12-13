@@ -3,7 +3,6 @@ from matplotlib import pyplot as plt
 import numpy as np
 import cv2
 import random
-import md5
 import mathFunc
 
 def showImg(img, flag = 0):
@@ -83,11 +82,20 @@ def zeroLSB(block):
     for row in xrange(noRow):
         for col in xrange(noCol):
             val = block[row, col]
-            val>>1
-            val<<1
+            val = val >> 1
+            val = val << 1
     return block
 
 def xor(block, bitArray):
     bitBlock = mathFunc.reshape(bitArray)
     dst = np.bitwise_xor(block, bitArray)
     return dst
+
+def extractLSB(block):
+    noRow = block.shape[0]
+    noCol = block.shape[1]
+    for row in xrange(noRow):
+        for col in xrange(noCol):
+            val = block[row, col]
+            var = val & 1
+    return block

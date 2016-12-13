@@ -13,7 +13,7 @@ def decPrime(num):
     res.add(num)
     return list(res)
 
-def getBlockSize(hli, wli, MAX):#output [height, width]
+def getBlockSize(hli, wli, MAX):#output [height, width] TODO
     if hli[len(hli) - 1] >= wli[len(wli) - 1]:
         bli = hli
         sli = wli

@@ -13,30 +13,33 @@ def decPrime(num):
     res.add(num)
     return list(res)
 
-def getBlockSize(hli, wli, MAX):#output [height, width] TODO
-    if hli[len(hli) - 1] >= wli[len(wli) - 1]:
-        bli = hli
-        sli = wli
-        flag = 1
-    else:
-        bli = wli
-        sli = hli
-        flag = 2
+def allFct(num):#Just for fun, I use a special algorithm
+    decPri = decPrime(num)
+    res = set()
+    res.add(num)
+    exp = list[]
+    n = 0
+    for ele in decPri:
+        while num%ele == 0:
+            num = num/ele
+            n++
+        exp.append(n)
+        n = 0
+    #use decorator here
+    
+    return list(res)
+
+def getBlockSize(shape, MAX):#output [height, width] TODO
     size = list()
-    for i in xrange(1, len(sli)):
-        for j in xrange(1, len(bli)):
-            if (sli[-i] * bli[-j]) <= MAX:
-                if flag == 1:
-                    windex = len(wli) - i
-                    hindex = len(hli) - j 
-                if flag == 2:
-                    windex = len(wli) - j 
-                    hindex = len(hli) - i 
-                break
-            else:
-                continue
-    size.append(hli[hindex])
-    size.append(wli[windex])    
+    hList = allFct(shape[0])
+    wList = allFct(shape[1])
+    height = shape[0]
+    width = shape[1]
+    dupelms = lambda lst,n: reduce(lambda s,t:s+t, map(lambda l,n=n: [l]*n, lst))#??? WTF!
+    combine = lambda xs,ys: map(None, xs*len(ys), dupelms(ys,len(xs)))
+    bigmuls = lambda xs,ys: filter(lambda (x,y):x*y <= MAX, combine(xs,ys))# I hate FP!!
+    temp = bigmuls(hList, wList)
+
     return size                
 
 def hash(M, N, block):#return bit array

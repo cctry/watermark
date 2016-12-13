@@ -52,13 +52,7 @@ def splitImg(img):#from left to right; from top to down
     height = img.shape[0]
     width = img.shape[1]
     LEN = 128#length of MD5
-    hli = mathFunc.decPrime(height)
-    wli = mathFunc.decPrime(width)
-    if len(hli) == 1:
-        pass#TODO exception
-    if len(wli) == 1:
-        pass#TODO exception
-    size = mathFunc.getBlockSize(hli, wli, LEN)
+    size = mathFunc.getBlockSize(img.shape, LEN)
     hNum = height/size[0]
     wNum = width/size[1]
     res = list()

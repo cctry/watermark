@@ -1,45 +1,39 @@
 # -*- coding: utf-8 -*
 import md5
 import numpy
-def decPrime(num):
-    res = set()
-    for i in xrange(2,num+1):
-        while num!=i:
-            if num%i == 0:
-                res.add(i)
-                num = num/i
-            else:
-                break
-    res.add(num)
-    return list(res)
+import math
 
-def allFct(num):#Just for fun, I use a special algorithm
-    decPri = decPrime(num)
-    res = set()
-    res.add(num)
-    exp = list[]
-    n = 0
-    for ele in decPri:
-        while num%ele == 0:
-            num = num/ele
-            n++
-        exp.append(n)
-        n = 0
-    #use decorator here
-    
-    return list(res)
+def allFct(num):
+    res = list()
+    for i in xrange(2,num+1):
+        if num%i == 0:
+            res.append(i)
+    return res
 
 def getBlockSize(shape, MAX):#output [height, width] TODO
-    size = list()
     hList = allFct(shape[0])
     wList = allFct(shape[1])
     height = shape[0]
     width = shape[1]
-    dupelms = lambda lst,n: reduce(lambda s,t:s+t, map(lambda l,n=n: [l]*n, lst))#??? WTF!
+    dupelms = lambda lst,n: reduce(lambda s,t:s+t, map(lambda l,n=n: [l]*n, lst))
     combine = lambda xs,ys: map(None, xs*len(ys), dupelms(ys,len(xs)))
     bigmuls = lambda xs,ys: filter(lambda (x,y):x*y <= MAX, combine(xs,ys))# I hate FP!!
     temp = bigmuls(hList, wList)
-
+    std = 0
+    for ele in temp:
+        if (ele[0]*ele[1]) > std:
+            if math.fabs(ele[0] - ele[1]) <= 0.5*max(ele):
+                size = ele
+                std = ele[0]*ele[1]
+            else:
+                continue
+        elif (ele[0]*ele[1]) == std:
+            if math.fabs(ele[0] - ele[1]) > math.fabs(size[0] - size[1]):
+                size = ele
+            else:
+                continue
+        else:
+            continue
     return size                
 
 def hash(M, N, block):#return bit array

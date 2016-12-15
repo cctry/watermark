@@ -10,7 +10,7 @@ def allFct(num):
             res.append(i)
     return res
 
-def getBlockSize(shape, MAX):#output [height, width] TODO
+def getBlockSize(shape, MAX):#output [height, width]
     hList = allFct(shape[0])
     wList = allFct(shape[1])
     height = shape[0]

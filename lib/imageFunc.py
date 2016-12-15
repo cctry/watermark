@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 import cv2
 import random
-import mathFunc
+import mathFunc as mfc
 
 def showImg(img, flag = 0):
     if img.ndim == 3:
@@ -52,7 +52,7 @@ def splitImg(img):#from left to right; from top to down
     height = img.shape[0]
     width = img.shape[1]
     LEN = 128#length of MD5
-    size = mathFunc.getBlockSize(img.shape, LEN)
+    size = mfc.getBlockSize(img.shape, LEN)
     hNum = height/size[0]
     wNum = width/size[1]
     res = list()
@@ -67,8 +67,8 @@ def splitImg(img):#from left to right; from top to down
     return res
     
 def getGChn(img):
-    b = cv2.split(img)[1]
-    return b
+    g = cv2.split(img)[1]
+    return g
 
 def zeroLSB(block):
     noRow = block.shape[0]
@@ -81,7 +81,7 @@ def zeroLSB(block):
     return block
 
 def xor(block, bitArray):
-    bitBlock = mathFunc.reshape(bitArray)
+    bitBlock = mfc.reshape(bitArray)
     dst = np.bitwise_xor(block, bitArray)
     return dst
 
@@ -93,3 +93,21 @@ def extractLSB(block):
             val = block[row, col]
             var = val & 1
     return block
+
+def binarize(img):
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)#grayscale
+    res = cv2.threshold(img, 127,255,cv2.THRESH_BINARY_INV)
+    return res[1]
+
+def replicate(img, size):#TODO
+    res = createImg(size)
+    for row in xrange(img.shape[0]):
+        for col in xrange(img.shape[1]):
+            res[row, col] = img[row, col]
+            if (row+img.shape[0]) <= res.shape[0]:
+                res[row+img.shape[0], col] = img[row, col]
+            if (col+img.shape[1]) <= res.shape[1]:
+                res[row, col+img.shape[1]] = img[row, col]
+            if (row+img.shape[0]) <= res.shape[0] and (row+img.shape[0]) <= res.shape[0]                
+                res[row+img.shape[0], col+img.shape[1]] = img[row, col]            
+    return res

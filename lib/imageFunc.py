@@ -16,7 +16,7 @@ def showImg(img, flag = 0):
 def createImg(shape, typeNum = 8):#[height, width]
     types = (8, 16, 32, 64)
     if typeNum not in types:
-        pass #TODO exception
+        pass 
     if typeNum == 8:
         emptyImage = np.zeros(shape, np.uint8)
     elif typeNum == 16:

@@ -51,7 +51,7 @@ def BGR2RGB(img):
 def splitImg(img):#from left to right; from top to down
     height = img.shape[0]
     width = img.shape[1]
-    LEN = 128#length of MD5
+    LEN = 117#length of RSA
     size = mfc.getBlockSize(img.shape, LEN)
     hNum = height/size[0]
     wNum = width/size[1]

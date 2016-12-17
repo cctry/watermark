@@ -36,9 +36,10 @@ def decrypt(key, msg):
     text = cipher.decrypt(base64.b64decode(msg), random_generator)
 
 def preprocess(img):#preprocess the image: convert matrix to array
-    lst = m.tolist()
+    lst = img.tolist()
     temp = list()
     for ele in lst:
         temp += ele
     res = map(lambda a: int(a), temp)
-    
+    #convert list to str TODO
+    return res

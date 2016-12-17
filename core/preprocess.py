@@ -1,4 +1,4 @@
-from lib import imageFunc as ifc
+from utils import imageFunc as ifc
 import cv2
 
 def preprocess(img, mark, flag):#if colered image, flag == 1  

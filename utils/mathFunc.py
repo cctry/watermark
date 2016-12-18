@@ -37,7 +37,7 @@ def getBlockSize(shape, MAX):#output [height, width]
     return size                
 
 def hash(M, N, block):#return bit array
-    m = md5.new()
+    m = md5.new()#TODO use str2bit
     m.update(str(M))
     m.update(str(N))
     m.update(block)
@@ -45,18 +45,18 @@ def hash(M, N, block):#return bit array
     biStrTemp = list()
     for char in temp:
         deTemp = ord(char)
-        binTemp = bin(deTemp)
-        binTemp = binTemp[2:]
+        binTemp = bin(deTemp)#str
+        binTemp = binTemp[2:]#remove '0b'
         if len(binTemp) < 8:
             pre = '0' * (8-len(binTemp))
             binTemp = pre + binTemp
-        biStrTemp.append(binTemp)
+        biStrTemp.append(binTemp)   
     nullStr = ''
-    resTemp = nullStr.join(biStrTemp)
-    bitArray = list()
+    resTemp = nullStr.join(biStrTemp)#str of bits
+    bitarray = list()
     for i in xrange(len(resTemp)):
-        res.append(resTemp[i])
-    return bitArray
+        bitarray.append(int(resTemp[i]))   
+    return bitarray
 
 def cutHash(hash, len):
     hash = hash[0:len]
@@ -65,3 +65,20 @@ def cutHash(hash, len):
 def reshape(bitarray, size):
     bitBlock = numpy.array(bitarray).reshape(size[0], size[1])
     return bitBlock
+
+def bit2str(bitarray):
+    charNum = ((len(bitarray) - len(bitarray)%8)/8) + 1
+    res = ''
+    for i in xrange(charNum-1):
+        strTemp = []
+        strTemp = map(lambda x: str(x), bitarray[0+8*i:8+8*i])
+        bistr = ''.join(strTemp)
+        res += chr(int(bistr,2))
+    strTemp = []
+    strTemp = map(lambda x: str(x), bitarray[len(bitarray)-len(bitarray)%8:])
+    bistr = ''.join(strTemp)
+    res += chr(int(bistr,2))
+    return res
+
+def str2bit():
+    pass#TODO

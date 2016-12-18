@@ -40,6 +40,6 @@ def preprocess(img):#preprocess the image: convert matrix to array
     temp = list()
     for ele in lst:
         temp += ele
-    res = map(lambda a: int(a), temp)
+    res = map(lambda a: int(a), temp)#from lsft to right, from up to down
     #convert list to str TODO
     return res

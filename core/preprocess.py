@@ -13,11 +13,12 @@ def preprocess(img, mark, flag):#if colered image, flag == 1
         elif img.shape[0] < mark.shape[0] and img.shape[1] < mark.shape[1]:#img is smaller than mark    
             mark = _cutImg(mark, img.shape)
         elif img.shape[0] < mark.shape[0] and img.shape[1] > mark.shape[1]:#img is shorter than mark
-            
-
-        return img, green, mark
+            if img.shape[0]*img.shape[1] >= mark.shape[0]*mark.shape[1]:
+                mark = _replicate(mark, img.shape)
+                else mark = _cutImg(img, size)
+            return img, green, mark
 #utils
-def _markProcess(img):    
+def _markProcess(img):
     return mfc.binarize(img)
 
 def _replicate(img, size):

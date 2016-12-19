@@ -67,18 +67,19 @@ def reshape(bitarray, size):
     return bitBlock
 
 def bit2str(bitarray):
-    charNum = ((len(bitarray) - len(bitarray)%8)/8) + 1
+    charNum = int(((len(bitarray) - len(bitarray)%8)/8)) + 1
     res = ''
     for i in xrange(charNum-1):
         strTemp = []
         strTemp = map(lambda x: str(x), bitarray[0+8*i:8+8*i])
         bistr = ''.join(strTemp)
         res += chr(int(bistr,2))
-    strTemp = []
-    strTemp = map(lambda x: str(x), bitarray[len(bitarray)-len(bitarray)%8:])
-    bistr = ''.join(strTemp)
-    res += chr(int(bistr,2))
+    if len(bitarray)%8 != 0:
+        strTemp = []
+        strTemp = map(lambda x: str(x), bitarray[len(bitarray)-len(bitarray)%8:])
+        bistr = ''.join(strTemp)
+        res += chr(int(bistr,2))
     return res
 
-def str2bit():
+def str2bit():#return bitarray
     pass#TODO

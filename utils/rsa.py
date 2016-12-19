@@ -5,7 +5,7 @@ from Crypto.Cipher import PKCS1_v1_5 as Cipher_pkcs1_v1_5
 from Crypto.Signature import PKCS1_v1_5 as Signature_pkcs1_v1_5
 from Crypto.PublicKey import RSA
 import base64
-from utils import mathFunc as mfc
+import mathFunc as mfc
 #global var
 random_generator = Random.new().read
 #functions

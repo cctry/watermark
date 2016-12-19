@@ -108,6 +108,6 @@ def replicate(img, size):#TODO
                 res[row+img.shape[0], col] = img[row, col]
             if (col+img.shape[1]) <= res.shape[1]:
                 res[row, col+img.shape[1]] = img[row, col]
-            if (row+img.shape[0]) <= res.shape[0] and (row+img.shape[0]) <= res.shape[0]                
+            if (row+img.shape[0]) <= res.shape[0] and (row+img.shape[0]) <= res.shape[0]:                
                 res[row+img.shape[0], col+img.shape[1]] = img[row, col]            
     return res

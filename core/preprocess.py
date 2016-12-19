@@ -10,7 +10,7 @@ def preprocess(img, mark, flag):#if colered image, flag == 1
     elif img.shape[0]*img.shape[1] >= mark.shape[0]*mark.shape[1]:
         mark = _replicate(mark, img.shape)
     else：
-        mark = _cutImg(img, size)：
+        mark = _cutImg(img, img.shape)：
     return img, green, mark
 #utils
 def _markProcess(img):

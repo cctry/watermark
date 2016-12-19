@@ -41,21 +41,8 @@ def hash(M, N, block):#return bit array
     m.update(str(M))
     m.update(str(N))
     m.update(block)
-    temp = m.digest()
-    biStrTemp = list()
-    for char in temp:
-        deTemp = ord(char)
-        binTemp = bin(deTemp)#str
-        binTemp = binTemp[2:]#remove '0b'
-        if len(binTemp) < 8:
-            pre = '0' * (8-len(binTemp))
-            binTemp = pre + binTemp
-        biStrTemp.append(binTemp)   
-    nullStr = ''
-    resTemp = nullStr.join(biStrTemp)#str of bits
-    bitarray = list()
-    for i in xrange(len(resTemp)):
-        bitarray.append(int(resTemp[i]))   
+    byteStr = m.digest()#byte str    
+    bitarray = str2bit(byteStr)      
     return bitarray
 
 def cutHash(hash, len):
@@ -81,5 +68,19 @@ def bit2str(bitarray):
         res += chr(int(bistr,2))
     return res
 
-def str2bit():#return bitarray
-    pass#TODO
+def str2bit(byteStr):#return bitarray
+    biStrTemp = list()
+    for char in byteStr:
+        deTemp = ord(char)
+        binTemp = bin(deTemp)#str
+        binTemp = binTemp[2:]#remove '0b'
+        if len(binTemp) < 8:
+            pre = '0' * (8-len(binTemp))
+            binTemp = pre + binTemp
+        biStrTemp.append(binTemp)   
+    nullStr = ''
+    resTemp = nullStr.join(biStrTemp)#str of bits
+    bitarray = list()
+    for i in xrange(len(resTemp)):
+        bitarray.append(int(resTemp[i]))   
+    return bitarray

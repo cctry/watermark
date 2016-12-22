@@ -91,7 +91,7 @@ def extractLSB(block):
     for row in xrange(noRow):
         for col in xrange(noCol):
             val = block[row, col]
-            var = val & 1
+            val = val & 1
     return block
 
 def binarize(img):
@@ -111,3 +111,11 @@ def replicate(img, size):
             if (row+img.shape[0]) <= res.shape[0] and (row+img.shape[0]) <= res.shape[0]:                
                 res[row+img.shape[0], col+img.shape[1]] = img[row, col]            
     return res
+
+def insert2LSB(block, bitmap):
+    noRow = block.shape[0]
+    noCol = block.shape[1]
+    for row in xrange(noRow):
+        for col in xrange(noCol):
+            block[row, col] += bitmap[row, col]
+    return block

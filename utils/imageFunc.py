@@ -134,3 +134,8 @@ def assembleBlocks(blockLst, size):
         if row >= size[0] or col >= size[1]:
             break
     return dst
+
+def merge(chn, img):
+    b, g, r = cv2.split(img)
+    b = chn
+    return cv2.merge([r, g, b])

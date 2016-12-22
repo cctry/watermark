@@ -11,10 +11,10 @@ class RSA:
     def generateKey(self, length):#length is as long as the block size times 8
         rsa = RSA.generate(length, self.random_generator)#make sure the length after encrypt is qulify
         private_pem = rsa.exportKey()#
-        with open('private.pem', 'w') as f:
+        with open('decrypt.pem', 'w') as f:
             f.write(private_pem)
         public_pem = rsa.publickey().exportKey()
-        with open('public.pem', 'w') as f:
+        with open('encrypt.pem', 'w') as f:
             f.write(public_pem)
 
     def loadKey(self, filename):

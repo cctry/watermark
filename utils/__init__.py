@@ -1,2 +1,2 @@
 
-__all__ = ['imageFunc', 'mathFunc']
+__all__ = ['imageFunc', 'mathFunc', 'rsa']

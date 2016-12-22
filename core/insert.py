@@ -7,7 +7,7 @@ def insert(img, mark, key):#TODO key
     oriImg, img, mark = preprocess(img, mark)#flag
     imgBlocks = ifc.splitImg(img)
     markBlocks = ifc.splitImg(mark)
-    imgBlocks = map(lambda b: ifc.zeroLSB(b))
+    imgBlocks = map(lambda b: ifc.zeroLSB(b), imgBlocks)
     rsa = RSA.rsa()
     blocks = list()
     for i in xrange(len(imgBlocks)):

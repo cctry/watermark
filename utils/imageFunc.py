@@ -81,8 +81,8 @@ def zeroLSB(block):
     return block
 
 def xor(block, bitArray):
-    bitBlock = mfc.reshape(bitArray)
-    dst = np.bitwise_xor(block, bitArray)
+    bitBlock = mfc.reshape(bitArray, (block.shape[0], block.shape[1]))
+    dst = np.bitwise_xor(block, bitBlock)
     return dst
 
 def extractLSB(block):
@@ -99,7 +99,7 @@ def binarize(img):
     res = cv2.threshold(img, 127,255,cv2.THRESH_BINARY_INV)
     return res[1]
 
-def replicate(img, size):#TODO
+def replicate(img, size):
     res = createImg(size)
     for row in xrange(img.shape[0]):
         for col in xrange(img.shape[1]):

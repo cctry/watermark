@@ -119,3 +119,18 @@ def insert2LSB(block, bitmap):
         for col in xrange(noCol):
             block[row, col] += bitmap[row, col]
     return block
+
+def assembleBlocks(blockLst, size):   
+    dst = createImg(size)
+    row, col = 0
+    for block in blockLst:
+        noRow = block.shape[0]
+        noCol = block.shape[1]
+        for brow in xrange(noRow):
+            for bcol in xrange(noCol):
+                dst[row+brow, col+bcol] = block[brow, bcol]
+        row += noRow
+        col += noCol
+        if row >= size[0] or col >= size[1]:
+            break
+    return dst

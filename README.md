@@ -2,7 +2,7 @@
 
 #### Description
 
-This program is designed to add water marks to pictures.  
+This program is designed to add water marks to pictures and use RSA encryption-decryption pair to exam or extract  
 
 #### Dependency
 
@@ -16,18 +16,22 @@ To insert a watermark, what are needed are a public key for RSA encryption, a pi
 
 
 
-- To insert a watermark: python watermark.py insert \<origin image fliename\> <mark image filename> <privateKey>
+- To insert a watermark: python watermark.py insert \<origin image fliename\> \<mark image filename\> \<publicKey\>
 
-​	e.x. python watermark.py insert image.png mark.png 4fe9fw684f5d9
+​	> e.x. python watermark.py insert image.png mark.png public.pem
 
-​	It will save the marked image and print your public key. 
+​	It will save the marked image at the current directory. 
 
-- To extract a watermark: python watermark.py extract <fliename> <publicKey> [<option> <path>]
+- To extract a watermark: python watermark.py extract \<fliename\> \<privateKey\> [-s \<path\>]
 
 ​	-s: save the extracted image to the current directory
 
 ​	-s <path>: save the extracted image to the path	
 
-​	e.x. python watermark.py extract image.png fg8s5d64f5d9
+​	> e.x. python watermark.py extract image.png private.pem
 
-​	It will display or save the extracted watermark.
+​	It will display the extracted watermark.
+   
+   > e.x. python watermark.py extract image.png private.pem -s %PATH
+
+   It will save the extracted watermark to the 'PATH'

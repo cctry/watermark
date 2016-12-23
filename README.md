@@ -12,11 +12,11 @@ This program is designed to add water marks to pictures.
 
 #### Usage
 
-To insert a watermark, what are needed are a private key for RSA encryption, a picture waiting for being marked, a bi-level image used as watermark
+To insert a watermark, what are needed are a public key for RSA encryption, a picture waiting for being marked, a bi-level image used as watermark
 
 
 
-- To insert a watermark: python watermark.py insert <origin image fliename> <mark image filename> <privateKey>
+- To insert a watermark: python watermark.py insert \<origin image fliename\> <mark image filename> <privateKey>
 
 ​	e.x. python watermark.py insert image.png mark.png 4fe9fw684f5d9
 

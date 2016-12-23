@@ -2,13 +2,19 @@ from utils import imageFunc as ifc
 from utils import mathFunc as mfc
 from utils import rsa as RSA
 from preprocess import preprocess
+import copy
 
-def insert(img, mark, key):#TODO key
-    oriImg, img, mark = preprocess(img, mark)#flag
-    imgBlocks = ifc.splitImg(img)
-    markBlocks = ifc.splitImg(mark)
+def insert(img, mark):
+    oriImg = copy.deepcopy(img)
+    if oriImg == 3:#colored
+        img = ifc.getGChn(oriImg)
+    mark = preprocess(img, mark)
+    imgBlocks, size = ifc.splitImg(img)
+    markBlocks, size = ifc.splitImg(mark)
     imgBlocks = map(lambda b: ifc.zeroLSB(b), imgBlocks)
     rsa = RSA.rsa()
+    rsa.generateKey(size[0]*size[1])#len
+    key = rsa.loadKey('public.pem')
     blocks = list()
     for i in xrange(len(imgBlocks)):
         imgBlock = imgBlocks[i]
@@ -20,5 +26,6 @@ def insert(img, mark, key):#TODO key
         block = ifc.insert2LSB(imgBlock, encrypted_block)
         blocks.append(block)
     dst = ifc.assembleBlocks(blocks, (oriImg.shape[0], oriImg.shape[1]))
-    res = ifc.merge(dst, oriImg)
-    return res
+    if oriImg.ndim == 3:#colored
+        dst = ifc.merge(dst, oriImg)
+    return dst

@@ -16,11 +16,12 @@ To insert a watermark, what are needed are a public key for RSA encryption, a pi
 
 
 
-- To insert a watermark: python watermark.py insert \<origin image fliename\> \<mark image filename\> \<publicKey\>
+- To insert a watermark: python watermark.py insert \<origin image fliename\> \<mark image filename\> [\<publicKey\>]
 
-> e.x. python watermark.py insert image.png mark.png public.pem
+> e.x. python watermark.py insert image.png mark.png [public.pem]
 
 ​	It will save the marked image at the current directory. 
+   If you want to generate keys, please leave it blank. 
 
 - To extract a watermark: python watermark.py extract \<fliename\> \<privateKey\> [-s \<path\>]
 

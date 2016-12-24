@@ -5,13 +5,11 @@ import cv2
 import random
 import mathFunc as mfc
 
-def showImg(img, flag = 0):
-    if img.ndim == 3:
-        img = BGR2RGB(img)
-    plt.imshow(img)
-    if flag == 0:
-        plt.xticks([]),plt.yticks([]) #隐藏坐标线 
-    plt.show()
+def showImg(img):
+    cv2.namedWindow('Img')
+    cv2.imshow('Img', img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 def createImg(shape, typeNum = 8):#[height, width]
     types = (8, 16, 32, 64)

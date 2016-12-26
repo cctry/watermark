@@ -6,7 +6,7 @@ import copy
 
 def insert(img, mark):
     oriImg = copy.deepcopy(img)
-    if oriImg == 3:#colored
+    if oriImg.ndim == 3:#colored
         img = ifc.getGChn(oriImg)
     mark = preprocess(img, mark)
     imgBlocks, size = ifc.splitImg(img)

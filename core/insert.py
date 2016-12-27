@@ -12,7 +12,7 @@ def insert(img, mark):
     imgBlocks, size = ifc.splitImg(img)
     markBlocks, size = ifc.splitImg(mark)
     imgBlocks = map(lambda b: ifc.zeroLSB(b), imgBlocks)
-    rsa = RSA.rsa()
+    rsa = RSA.encryptor()
     rsa.generateKey(size[0]*size[1])#len
     key = rsa.loadKey('public.pem')
     blocks = list()

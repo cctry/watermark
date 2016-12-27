@@ -5,12 +5,12 @@ from preprocess import preprocess
 
 def extract(img,key):
     testImg = copy.deepcopy(img)
-    if testImg.ndim == 3：#colored
+    if testImg.ndim == 3:#colored
         testImg,img = ifc.getGChn(testImg)
     imgBlocks, size = ifc.splitImg(img)
     imgBlocks1 = map(lambda b: ifc.zeroLSB(b), imgBlocks)
     imgBlocks2 = ifc.extractLSB(imgBlocks)
-    rsa = RSA.rsa()
+    rsa = RSA.encryptor()
     imgBlocks3 = RSA.decrypt(key,imgBlocks2)
     blocks = list()
     for i in xrange(len(imgBlocks1)):

@@ -25,22 +25,6 @@ def createImg(shape, typeNum = 8):#[height, width]
         emptyImage = np.zeros(shape, np.uint64)
     return emptyImage
 
-def salt(img, n, seed = 0):#在随机n个点添加噪声
-    for k in xrange(n):
-        if seed == 0:
-            i = int(random.random() * img.shape[1])
-            j = int(random.random() * img.shape[0])
-        else:
-            i = int(random.random(seed) * img.shape[1])
-            j = int(random.random(seed) * img.shape[0])
-        if img.ndim == 2:#为灰度图时
-            img[j,i] = 255
-        elif img.ndim == 3:
-            img[j,i,0] = 255
-            img[j,i,1] = 255
-            img[j,i,2] = 255
-    return img
-
 def BGR2RGB(img):
     b, g, r = cv2.split(img)
     dst = cv2.merge([r, g, b])

@@ -1,6 +1,5 @@
 from utils import imageFunc as ifc
 from utils import mathFunc as mfc
-from utils import rsa as RSA
 from preprocess import preprocess
 
 def extract(img):

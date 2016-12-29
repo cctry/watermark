@@ -46,7 +46,7 @@ def splitImg(img):#from left to right; from top to down
             endCol = size[1] + j*size[1]
             block = img[startRow:endRow, startCol:endCol]
             res.append(block)
-    return res, size
+    return res
     
 def getGChn(img):
     g = cv2.split(img)[1]
@@ -104,7 +104,8 @@ def insert2LSB(block, bitmap):
 
 def assembleBlocks(blockLst, size):   
     dst = createImg(size)
-    row, col = 0
+    row = 0
+    col = 0
     for block in blockLst:
         noRow = block.shape[0]
         noCol = block.shape[1]
@@ -119,5 +120,5 @@ def assembleBlocks(blockLst, size):
 
 def merge(chn, img):
     b, g, r = cv2.split(img)
-    b = chn
-    return cv2.merge([r, g, b])
+    g = chn
+    return cv2.merge([b, g, r])

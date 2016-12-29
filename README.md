@@ -22,14 +22,14 @@ To insert a watermark, what are needed are a public key for RSA encryption, a pi
 
 ​	It will save the marked image at the current directory and generate a pair of key. The private key ('private.pem') is for extract.
     
-- To extract a watermark: python watermark.py extract \<fliename\> \<privateKey\> [-s \<path\>]
+- To extract a watermark: python watermark.py extract \<fliename\> [-s \<path\>]
 
 ​	-s [<path>]: Save the extracted image to the current directory (or the path) with the name added by 'extracted_'	
 
-   > e.x. python watermark.py extract image.png private.pem
+   > e.x. python watermark.py extract image.png
 
 ​	It will display the extracted watermark.
    
-   > e.x. python watermark.py extract image.png private.pem -s %PATH
+   > e.x. python watermark.py extract image.png-s %PATH
 
    It will save the extracted watermark to the 'PATH'

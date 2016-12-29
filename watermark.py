@@ -29,18 +29,18 @@ if sys.argv[1] == 'insert':
     exit()
 if sys.argv[1] == 'extract':
     img = cv2.imread(sys.argv[2], -1)
-    if len(sys.argv) == 6:#full arg with path
-        if sys.argv[4] != '-s':
+    if len(sys.argv) == 5:#full arg with path
+        if sys.argv[3] != '-s':
             argError()
-        path = sys.argv[5]        
+        path = sys.argv[4]        
         dst = extract(img)
         cv2.imwrite(path+'extracted_'+sys.argv[2], dst)
     if len(sys.argv) == 5:#save without path
-        if sys.argv[4] != '-s':
+        if sys.argv[3] != '-s':
             argError()       
         dst = extract(img)
         cv2.imwrite('extracted_'+sys.argv[2], dst)
-    if len(sys.argv) == 4:#show the image
+    if len(sys.argv) == 3:#show the image
         dst = extract(img)
         show(dst)
         exit()

@@ -106,16 +106,24 @@ def assembleBlocks(blockLst, size):
     dst = createImg(size)
     row = 0
     col = 0
+    blockSize = (blockLst[0].shape[0], blockLst[0].shape[1])
+    #closure
+    def newFill(row, col, d=dst):#start row and col
+        def fill(block):
+            blockH = blockSize[0]
+            blockW = blockSize[1]
+            for bRow in xrange(blockH):
+                for bCol in xrange(blockW):
+                    d[row+bRow, col+bCol] = block[bRow, bCol]
+        return fill
+
     for block in blockLst:
-        noRow = block.shape[0]
-        noCol = block.shape[1]
-        for brow in xrange(noRow):
-            for bcol in xrange(noCol):
-                dst[row+brow, col+bcol] = block[brow, bcol]
-        row += noRow
-        col += noCol
-        if row >= size[0] or col >= size[1]:
-            break
+        fill = newFill(row, col)
+        fill(block)
+        col += block.shape[1]
+        if col >= size[1]:
+            col = 0
+            row += block.shape[0]
     return dst
 
 def merge(chn, img):

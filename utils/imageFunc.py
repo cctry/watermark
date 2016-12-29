@@ -104,7 +104,8 @@ def insert2LSB(block, bitmap):
 
 def assembleBlocks(blockLst, size):   
     dst = createImg(size)
-    row, col = 0
+    row = 0
+    col = 0
     for block in blockLst:
         noRow = block.shape[0]
         noCol = block.shape[1]

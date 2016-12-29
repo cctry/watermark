@@ -24,7 +24,8 @@ if len(sys.argv) <= 1 or len(sys.argv) > 6:
 if sys.argv[1] == 'insert':
     img = cv2.imread(sys.argv[2], -1)
     mark = cv2.imread(sys.argv[3], -1)
-    insert(img, mark)
+    dst = insert(img, mark)
+    cv2.imwrite('inserted_'+sys.argv[2], dst)
     exit()
 if sys.argv[1] == 'extract':
     img = cv2.imread(sys.argv[2], -1)

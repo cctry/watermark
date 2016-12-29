@@ -3,7 +3,7 @@ from utils import mathFunc as mfc
 from utils import rsa as RSA
 from preprocess import preprocess
 
-def extract(img,key):
+def extract(img):
     testImg = copy.deepcopy(img)
     if testImg.ndim == 3:#colored
         img = ifc.getGChn(testImg)

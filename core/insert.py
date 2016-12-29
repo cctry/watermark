@@ -9,12 +9,9 @@ def insert(img, mark):
     if oriImg.ndim == 3:#colored
         img = ifc.getGChn(oriImg)
     mark = preprocess(img, mark)
-    imgBlocks, size = ifc.splitImg(img)
-    markBlocks, size = ifc.splitImg(mark)
+    imgBlocks = ifc.splitImg(img)
+    markBlocks = ifc.splitImg(mark)
     imgBlocks = map(lambda b: ifc.zeroLSB(b), imgBlocks)
-    rsa = RSA.encryptor()
-    rsa.generateKey(size[0]*size[1])#len
-    key = rsa.loadKey('public.pem')
     blocks = list()
     for i in xrange(len(imgBlocks)):
         imgBlock = imgBlocks[i]
@@ -22,8 +19,7 @@ def insert(img, mark):
         hashBits = mfc.hash(oriImg.shape[1], oriImg.shape[0], imgBlock)
         hashBits = mfc.cutHash(hashBits, imgBlock.shape[0]*imgBlock.shape[1])
         bitmap = ifc.xor(markBlock, hashBits)
-        encrypted_block = rsa.encrypt(key, bitmap)
-        block = ifc.insert2LSB(imgBlock, encrypted_block)
+        block = ifc.insert2LSB(imgBlock, bitmap)
         blocks.append(block)
     dst = ifc.assembleBlocks(blocks, (oriImg.shape[0], oriImg.shape[1]))
     if oriImg.ndim == 3:#colored

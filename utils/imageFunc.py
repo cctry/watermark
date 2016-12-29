@@ -46,7 +46,7 @@ def splitImg(img):#from left to right; from top to down
             endCol = size[1] + j*size[1]
             block = img[startRow:endRow, startCol:endCol]
             res.append(block)
-    return res, size
+    return res
     
 def getGChn(img):
     g = cv2.split(img)[1]

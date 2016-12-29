@@ -121,4 +121,5 @@ def assembleBlocks(blockLst, size):
 def merge(chn, img):
     b, g, r = cv2.split(img)
     g = chn
-    return cv2.merge([b, g, r])
+    cv2.merge([b, g, r], img)
+    return img

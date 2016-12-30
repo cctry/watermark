@@ -57,9 +57,8 @@ def zeroLSB(block):
     noCol = block.shape[1]
     for row in xrange(noRow):
         for col in xrange(noCol):
-            val = block[row, col]
-            val = val >> 1
-            val = val << 1
+            block[row, col] = block[row, col] >> 1
+            block[row, col] = block[row, col] << 1
     return block
 
 def xor(block, bitArray):
@@ -77,10 +76,10 @@ def extractLSB(block):
 
 def binarize(img):
     img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)#grayscale
-    res = cv2.threshold(img, 127,255,cv2.THRESH_BINARY_INV)
+    res = cv2.threshold(img, 127,1,cv2.THRESH_BINARY_INV)
     return res[1]
 
-def replicate(img, size):
+def replicate(img, size):#TODO
     res = createImg(size)
     for row in xrange(img.shape[0]):
         for col in xrange(img.shape[1]):
@@ -127,6 +126,5 @@ def assembleBlocks(blockLst, size):
 
 def merge(chn, img):
     b, g, r = cv2.split(img)
-    g = chn
-    cv2.merge([b, g, r], img)
+    cv2.merge([b, chn, r], img)
     return img

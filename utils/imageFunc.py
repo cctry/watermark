@@ -71,7 +71,7 @@ def extractLSB(block):
     noCol = block.shape[1]
     for row in xrange(noRow):
         for col in xrange(noCol):
-            block[row, col] &= 1
+            block[row, col] = block[row, col] & 1
     return block
 
 def binarize(img):

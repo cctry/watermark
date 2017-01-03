@@ -4,6 +4,7 @@ import numpy as np
 import cv2
 import random
 import mathFunc as mfc
+import copy
 
 def showImg(img):
     cv2.namedWindow('Img')
@@ -53,13 +54,14 @@ def getGChn(img):
     return g
 
 def zeroLSB(block):
+    dst = copy.deepcopy(block)
     noRow = block.shape[0]
     noCol = block.shape[1]
     for row in xrange(noRow):
         for col in xrange(noCol):
-            block[row, col] = block[row, col] >> 1
-            block[row, col] = block[row, col] << 1
-    return block
+            dst[row, col] = dst[row, col] >> 1
+            dst[row, col] = dst[row, col] << 1
+    return dst
 
 def xor(block, bitArray):
     bitBlock = mfc.reshape(bitArray, (block.shape[0], block.shape[1]))
@@ -67,12 +69,13 @@ def xor(block, bitArray):
     return dst
 
 def extractLSB(block):
+    dst = copy.deepcopy(block)
     noRow = block.shape[0]
     noCol = block.shape[1]
     for row in xrange(noRow):
         for col in xrange(noCol):
-            block[row, col] = block[row, col] & 1
-    return block
+            dst[row, col] = dst[row, col] & 1
+    return dst
 
 def binarize(img):
     img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)#grayscale
